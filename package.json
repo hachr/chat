@@ -8,7 +8,8 @@
   "dependencies": {
     "ws": "0.4.x",
     "express": "3.x",
-    "redis": "*"
+    "redis": "*",
+	"lodash": "*"
   },
   "engines": {
     "node": "0.10.x",

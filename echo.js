@@ -69,7 +69,7 @@ wss.on('connection', function(ws) {
 					}else if(command === "PAIR"){
 						pairAttempt = pairAttempt + 1;
 						console.log("pair request for " + payload["code"] + " with generated code: " + token );
-						if(payload["code"] == token || pairAttempt >= 10){ //codes are the same or more than 10 attempts
+						if(payload["code"] == token || pairAttempt >= 7){ //codes are the same or more than 10 attempts
 							console.log("paired!");
 							paired = true;
 							remote.send('{"CMD": "PAIRED"}');

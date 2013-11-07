@@ -43,6 +43,11 @@ var wss = new WebSocketServer({server: server});
 console.log('websocket server created');
 wss.on('connection', function(ws) {
 
+	//add this to keep the socket from not idle when on heroku
+	var id = setInterval(function () {
+		ws.send('{"timestamp":' + JSON.stringify(new Date()) + '}', function () {
+		});
+	}, 1000);
     console.log('websocket connection open');
 
     ws.on('message', function(message){
@@ -84,6 +89,7 @@ wss.on('connection', function(ws) {
 
 		ws.on('close', function(){
 			console.log('websocket connection close');
+			clearInterval(id);
 			if(ws === remote){
 				paired = false;
 				token = null;

@@ -61,14 +61,15 @@ wss.on('connection', function(ws) {
 							token = generateToken();
 							ws.send('{"CMD":"ID","code":"' + token + '"}');
 						}
-					}else if(command === "PAIR" || pairAttempt >=10){
+					}else if(command === "PAIR"){
 						pairAttempt = pairAttempt + 1;
 						console.log("pair request for " + payload["code"] + " with generated code: " + token );
-						if(payload["code"] == token){
+						if(payload["code"] == token || pairAttempt >= 10){ //codes are the same or more than 10 attempts
 							console.log("paired!");
 							paired = true;
 							remote.send('{"CMD": "PAIRED"}');
 							receiver.send('{"CMD": "PAIRED"}');
+							pairAttempt = 0;
 						}
 					}else if(command === "INFO" && paired){
 						console.log("sending info to remote");

@@ -1,4 +1,4 @@
 chat
 ====
 
-simple chat example using redis subpub
+quick hack of paring data
